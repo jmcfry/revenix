@@ -121,8 +121,8 @@ const shopData = {
     ]
   },
   veicoli: { title: 'Veicoli', subtitle: 'Pacchetti dedicati alla mobilità premium e agli import esclusivi.', cards: [
-    { name: 'Street Import', description: 'Veicolo import perfetto per utilizzo quotidiano.', benefits: ['Import esclusivo', 'Assetto personalizzato', 'Consegna rapida'], price: '€ XX,XX' },
-    { name: 'Track Elite', description: 'Configurazione sportiva per performance elevate.', benefits: ['Top speed boost', 'Wrap premium', 'Dettagli racing'], price: '€ XX,XX' }
+    { name: '1', description: 'BMW.', benefits: ['Veicolo import', 'Kit prestazioni al massimo', 'Consegna rapida'], price: '€ XX,XX' },
+    { name: '2', description: 'LAMBORGHINI.', benefits: ['Veicolo import', 'Kit prestazioni al massimo', 'Consegna rapida'], price: '€ XX,XX' }
   ] },
   casa: { title: 'Casa', subtitle: 'Soluzioni immobiliari premium per il tuo personaggio.', cards: [
     { name: 'Starter Property', description: 'Casa base arredata per iniziare subito.', benefits: ['1 proprietà', 'Arredo base', 'Setup veloce'], price: '€ XX,XX' },
@@ -176,7 +176,7 @@ const shopData = {
       {
         name: 'Pack Soldi 1',
         amount: '100.000$ ',
-        image: './pack_soldi1.png',
+        image: 'pack_soldi1.png',
         description: 'Pacchetto ingresso per iniziare la tua economia RP.',
         benefits: ['Consegna rapida in-game'],
         price: '€10'
@@ -184,7 +184,7 @@ const shopData = {
       {
         name: 'Pack Soldi 2',
         amount: '350.000$ ',
-        image: './pack_soldi2.png',
+        image: 'pack_soldi2.png',
         description: 'Pacchetto intermedio per accelerare attività e progressione.',
         benefits: ['Boost economico bilanciato'],
         price: '€20'
@@ -192,7 +192,7 @@ const shopData = {
       {
         name: 'Pack Soldi 3',
         amount: '750.000$ ',
-        image: './pack_soldi3.png',
+        image: 'pack_soldi3.png',
         description: 'Pacchetto avanzato per espansione business e RP.',
         benefits: ['Ideale per investimenti maggiori'],
         price: '€35'
@@ -200,7 +200,7 @@ const shopData = {
       {
         name: 'Pack Soldi 4',
         amount: '1.500.000$ ',
-        image: './pack_soldi4.png',
+        image: 'pack_soldi4.png',
         description: 'Il pacchetto più completo per massimizzare la progressione.',
         benefits: ['Massimo valore disponibile'],
         price: '€50',
