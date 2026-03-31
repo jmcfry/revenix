@@ -400,3 +400,129 @@ h2 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Shop section */
+.shop-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.shop-sidebar {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+  position: sticky;
+  top: 100px;
+}
+
+.shop-tab {
+  border: 1px solid var(--line);
+  background: rgba(255, 122, 0, 0.07);
+  color: var(--muted);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  text-align: left;
+  font-family: "Orbitron", sans-serif;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.shop-tab:hover,
+.shop-tab.active {
+  color: #fff;
+  border-color: rgba(255, 159, 26, 0.95);
+  background: linear-gradient(130deg, rgba(255, 122, 0, 0.45), rgba(255, 159, 26, 0.35));
+  box-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
+}
+
+.shop-content {
+  min-height: 330px;
+}
+
+.shop-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.shop-panel-title {
+  font-family: "Orbitron", sans-serif;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  color: #fff2e4;
+  text-shadow: 0 0 10px rgba(255, 122, 0, 0.35);
+}
+
+.shop-panel-sub {
+  color: var(--muted);
+}
+
+.shop-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.shop-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: linear-gradient(170deg, rgba(24, 18, 12, 0.5), rgba(12, 12, 12, 0.95));
+  padding: 1.2rem;
+  display: grid;
+  gap: 0.6rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.shop-item:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 159, 26, 0.85);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4), 0 0 22px rgba(255, 122, 0, 0.3);
+}
+
+.shop-item h3 {
+  font-family: "Orbitron", sans-serif;
+  text-transform: uppercase;
+  color: #fff2e4;
+  font-size: 0.98rem;
+}
+
+.shop-price {
+  font-family: "Orbitron", sans-serif;
+  color: var(--orange-strong);
+  text-shadow: 0 0 10px rgba(255, 122, 0, 0.45);
+}
+
+.shop-placeholder {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 1rem;
+  color: var(--muted);
+  background: rgba(255, 122, 0, 0.05);
+}
+
+.fade-in {
+  animation: panelFade 0.28s ease;
+}
+
+@keyframes panelFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1020px) {
+  .shop-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .shop-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-sidebar {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
