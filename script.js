@@ -3,7 +3,6 @@ const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
 const navLinks = document.querySelectorAll('.nav-links a');
 const navbar = document.querySelector('.navbar');
-const orbs = document.querySelectorAll('.orb');
 
 if (menuToggle && nav) {
   menuToggle.addEventListener('click', () => {
@@ -25,16 +24,6 @@ window.addEventListener('scroll', () => {
   navbar.style.boxShadow = scrolled ? '0 10px 30px rgba(0,0,0,0.35)' : 'none';
 });
 
-window.addEventListener('mousemove', (event) => {
-  const x = (event.clientX / window.innerWidth - 0.5) * 14;
-  const y = (event.clientY / window.innerHeight - 0.5) * 14;
-
-  orbs.forEach((orb, index) => {
-    const factor = (index + 1) * 0.35;
-    orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
-  });
-});
-
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -48,6 +37,83 @@ const revealObserver = new IntersectionObserver(
 );
 
 reveals.forEach((section) => revealObserver.observe(section));
+
+const shopTabs = document.querySelectorAll('.shop-tab');
+const shopPanel = document.getElementById('shop-panel');
+
+const shopData = {
+  supporter: {
+    title: 'Supporter',
+    subtitle: 'Scegli il pacchetto premium più adatto al tuo percorso su Revenix RP.',
+    cards: [
+      {
+        name: 'Supporter Argento',
+        description: 'Pacchetto entry-level con vantaggi base e supporto prioritario community.',
+        price: '€ XX,XX'
+      },
+      {
+        name: 'Supporter Oro',
+        description: 'Benefici estesi, accessi esclusivi e perks dedicati al gameplay RP.',
+        price: '€ XX,XX'
+      },
+      {
+        name: 'Supporter Diamante',
+        description: 'Pacchetto top con priorità elevata, bonus premium e supporto dedicato.',
+        price: '€ XX,XX'
+      }
+    ]
+  },
+  veicoli: { title: 'Veicoli', subtitle: 'Sezione in aggiornamento: presto disponibili pacchetti dedicati ai veicoli.' },
+  casa: { title: 'Casa', subtitle: 'Sezione in aggiornamento: presto disponibili opzioni immobili e housing.' },
+  fazioni: { title: 'Fazioni', subtitle: 'Sezione in aggiornamento: presto disponibili pacchetti fazione.' },
+  armi: { title: 'Armi', subtitle: 'Sezione in aggiornamento: presto disponibili bundle armi e accessori.' },
+  soldi: { title: 'Soldi', subtitle: 'Sezione in aggiornamento: presto disponibili pacchetti economici.' },
+  'multi-pg': { title: 'Multi-PG', subtitle: 'Sezione in aggiornamento: presto disponibili slot personaggi aggiuntivi.' },
+  boost: { title: 'Boost', subtitle: 'Sezione in aggiornamento: presto disponibili boost progressione.' }
+};
+
+function renderShop(section) {
+  if (!shopPanel || !shopData[section]) return;
+
+  const data = shopData[section];
+
+  let html = `<h3 class="shop-panel-title">${data.title}</h3><p class="shop-panel-sub">${data.subtitle}</p>`;
+
+  if (data.cards) {
+    const cardsHtml = data.cards
+      .map(
+        (card) => `
+          <article class="shop-item">
+            <h3>${card.name}</h3>
+            <p>${card.description}</p>
+            <p class="shop-price">Prezzo: ${card.price}</p>
+            <a class="btn btn-small" href="https://discord.gg/" target="_blank" rel="noopener noreferrer">Acquista</a>
+          </article>
+        `
+      )
+      .join('');
+
+    html += `<div class="shop-cards">${cardsHtml}</div>`;
+  } else {
+    html += '<div class="shop-placeholder">Contenuto in arrivo. Resta aggiornato sul nostro Discord.</div>';
+  }
+
+  shopPanel.classList.remove('fade-in');
+  shopPanel.innerHTML = html;
+  requestAnimationFrame(() => shopPanel.classList.add('fade-in'));
+}
+
+if (shopTabs.length && shopPanel) {
+  renderShop('supporter');
+
+  shopTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      shopTabs.forEach((item) => item.classList.remove('active'));
+      tab.classList.add('active');
+      renderShop(tab.dataset.shop);
+    });
+  });
+}
 
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
@@ -102,7 +168,7 @@ function connectParticles() {
       if (distance < 125) {
         const opacity = 1 - distance / 125;
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(168, 85, 247, ${opacity * 0.25})`;
+        ctx.strokeStyle = `rgba(255, 122, 0, ${opacity * 0.2})`;
         ctx.lineWidth = 1;
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
