@@ -29,46 +29,45 @@
 
         <nav id="primary-nav" class="nav" aria-label="Navigazione principale">
           <ul class="nav-links">
-            <li><a href="index.html#chi-siamo">Chi siamo</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="index.html#fazioni">Fazioni</a></li>
-            <li><a href="index.html#staff">Staff</a></li>
             <li><a href="regolamento.html">Regolamento</a></li>
+            <li><a href="#shop-top">Shop</a></li>
           </ul>
         </nav>
 
-        <a class="btn btn-small" href="index.html">Home</a>
+        <a class="btn btn-small" href="https://discord.gg/" target="_blank" rel="noopener noreferrer">Discord</a>
       </div>
     </header>
 
-    <main>
-      <section class="rules-hero section reveal">
+    <main id="shop-top">
+      <section class="rules-hero section reveal shop-hero">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
           <img src="revenix.png" alt="Logo Revenix RP" class="hero-logo" />
-          <p class="kicker">Store Ufficiale</p>
-          <h1>Negozio Revenix</h1>
-          <p class="subtitle">Seleziona una categoria e visualizza i pacchetti disponibili.</p>
+          <p class="kicker">Shop Ufficiale</p>
+          <h1>Negozio Revenix RP</h1>
+          <p class="subtitle">Pacchetti premium, upgrade e contenuti esclusivi per il tuo percorso RP.</p>
         </div>
       </section>
 
       <section id="negozio" class="section reveal">
-        <div class="container">
-          <div class="shop-layout">
-            <aside class="card shop-sidebar">
-              <button class="shop-tab active" data-shop="supporter">Supporter</button>
-              <button class="shop-tab" data-shop="veicoli">Veicoli</button>
-              <button class="shop-tab" data-shop="casa">Casa</button>
-              <button class="shop-tab" data-shop="fazioni">Fazioni</button>
-              <button class="shop-tab" data-shop="armi">Armi</button>
-              <button class="shop-tab" data-shop="soldi">Soldi</button>
-              <button class="shop-tab" data-shop="multi-pg">Multi-PG</button>
-              <button class="shop-tab" data-shop="boost">Boost</button>
-            </aside>
+        <div class="container shop-shell">
+          <aside class="card shop-sidebar">
+            <h2 class="shop-menu-title">Categorie</h2>
+            <button class="shop-tab active" data-shop="supporter">Supporter</button>
+            <button class="shop-tab" data-shop="veicoli">Veicoli</button>
+            <button class="shop-tab" data-shop="casa">Casa</button>
+            <button class="shop-tab" data-shop="fazioni">Fazioni</button>
+            <button class="shop-tab" data-shop="armi">Armi</button>
+            <button class="shop-tab" data-shop="soldi">Soldi</button>
+            <button class="shop-tab" data-shop="multi-pg">Multi-PG</button>
+            <button class="shop-tab" data-shop="boost">Boost</button>
+          </aside>
 
-            <div class="card shop-content">
-              <div id="shop-panel" class="shop-panel fade-in"></div>
-            </div>
-          </div>
+          <section class="card shop-content" aria-live="polite">
+            <div id="shop-panel" class="shop-panel fade-in"></div>
+          </section>
         </div>
       </section>
     </main>
@@ -88,4 +87,3 @@
     <script src="script.js"></script>
   </body>
 </html>
-
