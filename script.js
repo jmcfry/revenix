@@ -128,26 +128,91 @@ const shopData = {
     { name: 'Starter Property', description: 'Casa base arredata per iniziare subito.', benefits: ['1 proprietà', 'Arredo base', 'Setup veloce'], price: '€ XX,XX' },
     { name: 'Luxury Estate', description: 'Residenza avanzata con servizi esclusivi.', benefits: ['Villa premium', 'Garage esteso', 'Interiors esclusivi'], price: '€ XX,XX' }
   ] },
-  fazioni: { title: 'Fazioni', subtitle: 'Supporta la tua organizzazione con pacchetti dedicati.', cards: [
-    { name: 'Faction Kit', description: 'Pacchetto base per sviluppo fazione.', benefits: ['Bundle logistico', 'Boost organizzativo', 'Setup rapido'], price: '€ XX,XX' },
-    { name: 'Faction Elite', description: 'Upgrade completo per fazioni avanzate.', benefits: ['Assets premium', 'Supporto dedicato', 'Perk esclusivi'], price: '€ XX,XX' }
+  fazioni: {
+    title: 'Fazioni',
+    subtitle: 'Pacchetti fazione convertiti in formato shop professionale e ordinato.',
+    cards: [
+      {
+        name: 'Pack Base',
+        description: 'Essenziale per avvio operativo della fazione.',
+        benefits: ['7 Pistole 9mm', '500 colpi', '150.000 soldi puliti'],
+        price: '€18'
+      },
+      {
+        name: 'Pack Elite',
+        description: 'Upgrade intermedio con dotazione estesa.',
+        benefits: ['13 Pistole 9mm', '1500 colpi', '5 giubbotti antiproiettile', '300.000 soldi puliti'],
+        price: '€32'
+      },
+      {
+        name: 'Pack Supreme',
+        description: 'Pacchetto avanzato per operazioni ad alta intensità.',
+        benefits: ['20 Pistole 9mm', '3500 colpi', '10 giubbotti antiproiettile', '5 silenziatori', '500.000 soldi puliti', '150.000 soldi sporchi'],
+        price: '€50'
+      },
+      {
+        name: 'Pack Deluxe',
+        description: 'Versione completa con bonus veicolo incluso.',
+        benefits: ['20 Pistole 9mm', '4000 colpi', '10 giubbotti antiproiettile', '8 silenziatori', '500.000 soldi puliti', '200.000 soldi sporchi', 'Auto a scelta (<40€)'],
+        price: '€75'
+      }
+    ]
+  },
+  armi: {
+    title: 'Armi',
+    subtitle: 'Pack Pistole 9mm con prezzi ottimizzati e scontistiche progressive.',
+    note: 'Le armi acquistate seguono le regole del server. In caso di perdita o sequestro, non è previsto rimborso.',
+    cards: [
+      { name: 'Pack Pistole 9mm - 5 unità', description: 'Dotazione base per utilizzo iniziale.', benefits: ['5 pistole 9mm', 'Costo totale: €10'], price: '€10' },
+      { name: 'Pack Pistole 9mm - 10 unità', description: 'Formato convenienza con riduzione prezzo.', benefits: ['10 pistole 9mm', 'Sconto 10%'], price: '€18' },
+      { name: 'Pack Pistole 9mm - 15 unità', description: 'Pacchetto avanzato con sconto maggiorato.', benefits: ['15 pistole 9mm', 'Sconto 15%'], price: '€25' },
+      { name: 'Pack Pistole 9mm - 20 unità ★ Best Value', description: 'Miglior rapporto quantità/prezzo.', benefits: ['20 pistole 9mm', 'Best Value'], price: '€33' }
+    ]
+  },
+  soldi: {
+    title: 'Soldi',
+    subtitle: 'Pacchetti visuali denaro in-game con consegna immediata.',
+    cards: [
+      {
+        name: 'Pack Soldi 1',
+        amount: '100.000$ ',
+        image: 'pack_soldi1.png',
+        description: 'Pacchetto ingresso per iniziare la tua economia RP.',
+        benefits: ['Consegna rapida in-game'],
+        price: '€10'
+      },
+      {
+        name: 'Pack Soldi 2',
+        amount: '350.000$ ',
+        image: 'pack_soldi2.png',
+        description: 'Pacchetto intermedio per accelerare attività e progressione.',
+        benefits: ['Boost economico bilanciato'],
+        price: '€20'
+      },
+      {
+        name: 'Pack Soldi 3',
+        amount: '750.000$ ',
+        image: 'pack_soldi3.png',
+        description: 'Pacchetto avanzato per espansione business e RP.',
+        benefits: ['Ideale per investimenti maggiori'],
+        price: '€35'
+      },
+      {
+        name: 'Pack Soldi 4',
+        amount: '1.500.000$ ',
+        image: 'pack_soldi4.png',
+        description: 'Il pacchetto più completo per massimizzare la progressione.',
+        benefits: ['Massimo valore disponibile'],
+        price: '€50',
+        badge: 'Best Value'
+      }
+    ]
+  },
+  'multi-pg': { title: 'Pack PED e Multi-PG', subtitle: 'Aggiungi nuovi personaggi e amplia la tua esperienza narrativa o scegli il tuo personaggio ideale.', cards: [
+    { name: 'Slot +1', description: 'Pack PED.', benefits: ['Scelta di un personaggio ideale'], price: '€ 50,00' },
+    { name: 'Slot +1', description: 'Nuovo slot PG.', benefits: ['1 slot aggiuntivo nuovo PG'], price: '€ 20,00' }
   ] },
-  armi: { title: 'Armi', subtitle: 'Contenuti cosmetici e bundle accessori in linea col regolamento.', cards: [
-    { name: 'Weapon Visual Pack', description: 'Set estetico armi in tema Revenix.', benefits: ['Skin premium', 'Colori esclusivi', 'Varianti neon'], price: '€ XX,XX' },
-    { name: 'Tactical Upgrade', description: 'Pacchetto utility per loadout avanzato.', benefits: ['Set accessori', 'Preset tattico', 'UI weapon perks'], price: '€ XX,XX' }
-  ] },
-  soldi: { title: 'Soldi', subtitle: 'Pacchetti economici bilanciati per progressione RP.', cards: [
-    { name: 'Economy Start', description: 'Boost iniziale per attività lecite.', benefits: ['Capitale base', 'Utility pack', 'Bonus settimanale'], price: '€ XX,XX' },
-    { name: 'Economy Pro', description: 'Pacchetto espansione business avanzato.', benefits: ['Fondo premium', 'Perks business', 'Supporto crescita'], price: '€ XX,XX' }
-  ] },
-  'multi-pg': { title: 'Multi-PG', subtitle: 'Aggiungi nuovi personaggi e amplia la tua esperienza narrativa.', cards: [
-    { name: 'Slot +1', description: 'Un personaggio extra con attivazione rapida.', benefits: ['1 slot aggiuntivo', 'Attivazione fast', 'Supporto setup'], price: '€ XX,XX' },
-    { name: 'Slot +2', description: 'Flessibilità totale con due personaggi extra.', benefits: ['2 slot aggiuntivi', 'Priorità attivazione', 'Gestione avanzata'], price: '€ XX,XX' }
-  ] },
-  boost: { title: 'Boost', subtitle: 'Pacchetti boost per accelerare progressione e sviluppo RP.', cards: [
-    { name: 'Progress Boost', description: 'Incremento progressione attività e obiettivi.', benefits: ['Boost XP', 'Durata estesa', 'Attivazione immediata'], price: '€ XX,XX' },
-    { name: 'Business Boost', description: 'Pacchetto dedicato a imprese e attività.', benefits: ['Bonus produttività', 'Perks economici', 'Supporto premium'], price: '€ XX,XX' }
-  ] }
+  
 };
 
 function panelMarkup(data) {
@@ -162,7 +227,10 @@ function panelMarkup(data) {
     .map(
       (card) => `
       <article class="shop-item">
+        ${card.badge ? `<span class="shop-badge">${card.badge}</span>` : ''}
         <h3>${card.name}</h3>
+        ${card.image ? `<div class="shop-image-wrap"><img class="shop-image" src="${card.image}" alt="${card.name}" loading="lazy" /></div>` : ''}
+        ${card.amount ? `<p class="shop-amount">${card.amount}</p>` : ''}
         <p>${card.description}</p>
         <ul>${card.benefits.map((item) => `<li>◆ ${item}</li>`).join('')}</ul>
         <p class="shop-price">Prezzo: ${card.price}</p>
@@ -172,7 +240,8 @@ function panelMarkup(data) {
     )
     .join('');
 
-  return `${head}<div class="shop-cards">${cards}</div>`;
+  const note = data.note ? `<p class="shop-placeholder">${data.note}</p>` : '';
+  return `${head}<div class="shop-cards">${cards}</div>${note}`;
 }
 
 function renderShop(section, animate = true) {
