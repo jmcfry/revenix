@@ -3,6 +3,7 @@ const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
 const navLinks = document.querySelectorAll('.nav-links a');
 const navbar = document.querySelector('.navbar');
+const heroContent = document.querySelector('.hero-content');
 
 if (menuToggle && nav) {
   menuToggle.addEventListener('click', () => {
@@ -26,6 +27,27 @@ if (navbar) {
   });
 }
 
+if (heroContent) {
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+
+  window.addEventListener('mousemove', (event) => {
+    targetX = (event.clientX / window.innerWidth - 0.5) * 10;
+    targetY = (event.clientY / window.innerHeight - 0.5) * 8;
+  });
+
+  const animateParallax = () => {
+    currentX += (targetX - currentX) * 0.08;
+    currentY += (targetY - currentY) * 0.08;
+    heroContent.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
+    requestAnimationFrame(animateParallax);
+  };
+
+  animateParallax();
+}
+
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -42,94 +64,93 @@ reveals.forEach((section) => revealObserver.observe(section));
 
 const shopTabs = document.querySelectorAll('.shop-tab');
 const shopPanel = document.getElementById('shop-panel');
+const shopSidebar = document.querySelector('.shop-sidebar');
 
 const shopData = {
   supporter: {
     title: 'Supporter',
-    subtitle: 'Pacchetti premium con vantaggi esclusivi e priorità community.',
+    subtitle: 'Pacchetti ufficiali Revenix RP per supportare il server e sbloccare vantaggi premium.',
     cards: [
       {
         name: 'Supporter Argento',
-        description: 'Entry pack ideale per iniziare con bonus quality-of-life.',
-        benefits: ['Tag Discord dedicato', 'Canale supporter', 'Priorità ticket base'],
-        price: '€ XX,XX'
+        description: 'Pacchetto ideale per iniziare a supportare la community Revenix RP.',
+        benefits: [
+          'Sistema PED senza limiti',
+          'Ruolo Supporter su Discord',
+          'Accesso market privato',
+          'Giveaway esclusivi',
+          'Assistenza prioritaria',
+          'Canali Discord riservati',
+          'Contatto diretto con staff',
+          'Accesso anticipato spoiler'
+        ],
+        price: '€30'
       },
       {
         name: 'Supporter Oro',
-        description: 'Pacchetto avanzato con perks estesi e visibilità premium.',
-        benefits: ['Tutti i vantaggi Argento', 'Slot evento prioritario', 'Benefit estetici esclusivi'],
-        price: '€ XX,XX'
+        description: 'Include tutti i vantaggi Argento con bonus premium aggiuntivi.',
+        benefits: [
+          'Tutti i vantaggi Argento',
+          'Multi-PG (2 personaggi)',
+          'Veicolo Import esclusivo',
+          'Targa personalizzata',
+          'Bonus denaro in-game',
+          'Priorità su case e attività',
+          'Priority Queue',
+          'Area VIP Discord',
+          'Accesso anticipato completo'
+        ],
+        price: '€75'
       },
       {
         name: 'Supporter Diamante',
-        description: 'Pacchetto top tier per esperienza completa Revenix RP.',
-        benefits: ['Tutti i vantaggi Oro', 'Supporto prioritario', 'Pacchetto premium completo'],
-        price: '€ XX,XX'
+        description: 'Il pacchetto top per un’esperienza completa e massima priorità.',
+        benefits: [
+          'Tutti i vantaggi Oro',
+          'Multi-PG (3 personaggi)',
+          'Bonus $2.000.000',
+          'Villa o attività inclusa',
+          '2 veicoli Import full upgrade',
+          'Targhe illimitate',
+          'Accesso immediato server (priority 0)',
+          'Supporto diretto amministrazione',
+          'Accesso contenuti alpha'
+        ],
+        price: '€125'
       }
     ]
   },
-  veicoli: {
-    title: 'Veicoli',
-    subtitle: 'Selezione veicoli premium e pacchetti mobilità.',
-    cards: [
-      { name: 'Street Pack', description: 'Veicoli perfetti per utilizzo urbano.', benefits: ['2 veicoli civili', 'Custom base', 'Consegna rapida'], price: '€ XX,XX' },
-      { name: 'Sport Pack', description: 'Performance e stile per player competitivi.', benefits: ['Auto sportiva', 'Tuning estetico', 'Colori esclusivi'], price: '€ XX,XX' }
-    ]
-  },
-  casa: {
-    title: 'Casa',
-    subtitle: 'Bundle housing e upgrade immobiliari.',
-    cards: [
-      { name: 'Starter Home', description: 'Ingresso ideale nel sistema immobiliare.', benefits: ['Casa base', '1 garage', 'Set arredamento base'], price: '€ XX,XX' },
-      { name: 'Luxury Home', description: 'Soluzione premium per un lifestyle avanzato.', benefits: ['Villa premium', 'Garage ampliato', 'Decor pack esclusivo'], price: '€ XX,XX' }
-    ]
-  },
-  fazioni: {
-    title: 'Fazioni',
-    subtitle: 'Supporto e upgrade per organizzazioni RP.',
-    cards: [
-      { name: 'Faction Boost Base', description: 'Pacchetto iniziale per crescita fazione.', benefits: ['Kit logistico', 'Asset RP base', 'Supporto setup'], price: '€ XX,XX' },
-      { name: 'Faction Boost Pro', description: 'Upgrade completo per strutture avanzate.', benefits: ['Asset avanzati', 'Template operativi', 'Priorità gestione'], price: '€ XX,XX' }
-    ]
-  },
-  armi: {
-    title: 'Armi',
-    subtitle: 'Bundle armeria cosmetici e accessori (nel rispetto del regolamento).',
-    cards: [
-      { name: 'Weapon Skin Pack', description: 'Set estetico armi premium.', benefits: ['Skin rare', 'Varianti colore', 'Effetti personalizzati'], price: '€ XX,XX' },
-      { name: 'Tactical Bundle', description: 'Accessori e setup tattico avanzato.', benefits: ['Componenti ottimizzati', 'Preset loadout', 'Pack utility'], price: '€ XX,XX' }
-    ]
-  },
-  soldi: {
-    title: 'Soldi',
-    subtitle: 'Pacchetti economici bilanciati per progressione RP.',
-    cards: [
-      { name: 'Economy Start', description: 'Supporto iniziale per attività lecite.', benefits: ['Capitale iniziale', 'Kit lavoro', 'Bonus utilità'], price: '€ XX,XX' },
-      { name: 'Economy Plus', description: 'Upgrade economico per espansione business.', benefits: ['Fondo espansione', 'Bonus settimanale', 'Supporto sviluppo'], price: '€ XX,XX' }
-    ]
-  },
-  'multi-pg': {
-    title: 'Multi-PG',
-    subtitle: 'Slot personaggi aggiuntivi per ampliare il tuo RP.',
-    cards: [
-      { name: 'Slot +1', description: 'Aggiungi un personaggio extra al tuo account.', benefits: ['1 slot aggiuntivo', 'Setup rapido', 'Supporto attivazione'], price: '€ XX,XX' },
-      { name: 'Slot +2', description: 'Massima flessibilità narrativa con due slot.', benefits: ['2 slot aggiuntivi', 'Gestione avanzata', 'Priorità supporto'], price: '€ XX,XX' }
-    ]
-  },
-  boost: {
-    title: 'Boost',
-    subtitle: 'Pacchetti boost per accelerare la tua esperienza in modo bilanciato.',
-    cards: [
-      { name: 'XP Boost', description: 'Incremento progressione attività RP.', benefits: ['Boost temporaneo', 'Stack controllato', 'Attivazione immediata'], price: '€ XX,XX' },
-      { name: 'Business Boost', description: 'Supporto per crescita aziende e attività.', benefits: ['Bonus produttività', 'Perks economici', 'Supporto premium'], price: '€ XX,XX' }
-    ]
-  }
+  veicoli: { title: 'Veicoli', subtitle: 'Pacchetti dedicati alla mobilità premium e agli import esclusivi.', cards: [
+    { name: 'Street Import', description: 'Veicolo import perfetto per utilizzo quotidiano.', benefits: ['Import esclusivo', 'Assetto personalizzato', 'Consegna rapida'], price: '€ XX,XX' },
+    { name: 'Track Elite', description: 'Configurazione sportiva per performance elevate.', benefits: ['Top speed boost', 'Wrap premium', 'Dettagli racing'], price: '€ XX,XX' }
+  ] },
+  casa: { title: 'Casa', subtitle: 'Soluzioni immobiliari premium per il tuo personaggio.', cards: [
+    { name: 'Starter Property', description: 'Casa base arredata per iniziare subito.', benefits: ['1 proprietà', 'Arredo base', 'Setup veloce'], price: '€ XX,XX' },
+    { name: 'Luxury Estate', description: 'Residenza avanzata con servizi esclusivi.', benefits: ['Villa premium', 'Garage esteso', 'Interiors esclusivi'], price: '€ XX,XX' }
+  ] },
+  fazioni: { title: 'Fazioni', subtitle: 'Supporta la tua organizzazione con pacchetti dedicati.', cards: [
+    { name: 'Faction Kit', description: 'Pacchetto base per sviluppo fazione.', benefits: ['Bundle logistico', 'Boost organizzativo', 'Setup rapido'], price: '€ XX,XX' },
+    { name: 'Faction Elite', description: 'Upgrade completo per fazioni avanzate.', benefits: ['Assets premium', 'Supporto dedicato', 'Perk esclusivi'], price: '€ XX,XX' }
+  ] },
+  armi: { title: 'Armi', subtitle: 'Contenuti cosmetici e bundle accessori in linea col regolamento.', cards: [
+    { name: 'Weapon Visual Pack', description: 'Set estetico armi in tema Revenix.', benefits: ['Skin premium', 'Colori esclusivi', 'Varianti neon'], price: '€ XX,XX' },
+    { name: 'Tactical Upgrade', description: 'Pacchetto utility per loadout avanzato.', benefits: ['Set accessori', 'Preset tattico', 'UI weapon perks'], price: '€ XX,XX' }
+  ] },
+  soldi: { title: 'Soldi', subtitle: 'Pacchetti economici bilanciati per progressione RP.', cards: [
+    { name: 'Economy Start', description: 'Boost iniziale per attività lecite.', benefits: ['Capitale base', 'Utility pack', 'Bonus settimanale'], price: '€ XX,XX' },
+    { name: 'Economy Pro', description: 'Pacchetto espansione business avanzato.', benefits: ['Fondo premium', 'Perks business', 'Supporto crescita'], price: '€ XX,XX' }
+  ] },
+  'multi-pg': { title: 'Multi-PG', subtitle: 'Aggiungi nuovi personaggi e amplia la tua esperienza narrativa.', cards: [
+    { name: 'Slot +1', description: 'Un personaggio extra con attivazione rapida.', benefits: ['1 slot aggiuntivo', 'Attivazione fast', 'Supporto setup'], price: '€ XX,XX' },
+    { name: 'Slot +2', description: 'Flessibilità totale con due personaggi extra.', benefits: ['2 slot aggiuntivi', 'Priorità attivazione', 'Gestione avanzata'], price: '€ XX,XX' }
+  ] },
+  boost: { title: 'Boost', subtitle: 'Pacchetti boost per accelerare progressione e sviluppo RP.', cards: [
+    { name: 'Progress Boost', description: 'Incremento progressione attività e obiettivi.', benefits: ['Boost XP', 'Durata estesa', 'Attivazione immediata'], price: '€ XX,XX' },
+    { name: 'Business Boost', description: 'Pacchetto dedicato a imprese e attività.', benefits: ['Bonus produttività', 'Perks economici', 'Supporto premium'], price: '€ XX,XX' }
+  ] }
 };
 
-function renderShop(section) {
-  if (!shopPanel || !shopData[section]) return;
-
-  const data = shopData[section];
+function panelMarkup(data) {
   const head = `
     <div class="shop-panel-head">
       <h3 class="shop-panel-title">${data.title}</h3>
@@ -143,32 +164,69 @@ function renderShop(section) {
       <article class="shop-item">
         <h3>${card.name}</h3>
         <p>${card.description}</p>
-        <ul>
-          ${card.benefits.map((item) => `<li>${item}</li>`).join('')}
-        </ul>
+        <ul>${card.benefits.map((item) => `<li>◆ ${item}</li>`).join('')}</ul>
         <p class="shop-price">Prezzo: ${card.price}</p>
-        <a class="btn btn-small shop-buy" href="https://discord.gg/" target="_blank" rel="noopener noreferrer">Acquista</a>
+        <a class="btn btn-small shop-buy" href="https://paypal.me/danielenooo" target="_blank" rel="noopener noreferrer">Acquista</a>
       </article>
     `
     )
     .join('');
 
-  shopPanel.classList.remove('fade-in');
-  shopPanel.innerHTML = `${head}<div class="shop-cards">${cards}</div>`;
-  requestAnimationFrame(() => shopPanel.classList.add('fade-in'));
+  return `${head}<div class="shop-cards">${cards}</div>`;
+}
+
+function renderShop(section, animate = true) {
+  if (!shopPanel || !shopData[section]) return;
+  const html = panelMarkup(shopData[section]);
+
+  if (!animate) {
+    shopPanel.innerHTML = html;
+    return;
+  }
+
+  shopPanel.classList.add('panel-leave');
+  setTimeout(() => {
+    shopPanel.innerHTML = html;
+    shopPanel.classList.remove('panel-leave');
+    shopPanel.classList.add('panel-enter');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => shopPanel.classList.remove('panel-enter'));
+      });
+    });
+  }, 240);
 }
 
 if (shopTabs.length && shopPanel) {
-  renderShop('supporter');
+  renderShop('supporter', false);
 
-  shopTabs.forEach((tab) => {
+  shopTabs.forEach((tab, index) => {
     tab.addEventListener('click', () => {
       shopTabs.forEach((item) => item.classList.remove('active'));
       tab.classList.add('active');
-      renderShop(tab.dataset.shop);
+      if (shopSidebar) {
+        shopSidebar.style.setProperty('--active-index', index.toString());
+      }
+      renderShop(tab.dataset.shop, true);
     });
   });
+
+  if (shopSidebar) {
+    shopSidebar.style.setProperty('--active-index', '0');
+  }
 }
+
+document.querySelectorAll('.btn, .shop-tab, .card').forEach((element) => {
+  element.addEventListener('click', (event) => {
+    const ripple = document.createElement('span');
+    ripple.className = 'btn-ripple';
+    const rect = element.getBoundingClientRect();
+    ripple.style.left = `${event.clientX - rect.left}px`;
+    ripple.style.top = `${event.clientY - rect.top}px`;
+    element.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 650);
+  });
+});
 
 const canvas = document.getElementById('bg-canvas');
 
@@ -199,10 +257,7 @@ if (canvas) {
     update() {
       this.y -= this.speedY;
       this.x += this.speedX;
-
-      if (this.y < -10 || this.x < -20 || this.x > canvas.width + 20) {
-        this.reset();
-      }
+      if (this.y < -10 || this.x < -20 || this.x > canvas.width + 20) this.reset();
     }
 
     draw() {
@@ -218,10 +273,7 @@ if (canvas) {
   function connectParticles() {
     for (let i = 0; i < particles.length; i += 1) {
       for (let j = i + 1; j < particles.length; j += 1) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const distance = Math.hypot(dx, dy);
-
+        const distance = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
         if (distance < 125) {
           const opacity = 1 - distance / 125;
           ctx.beginPath();
@@ -237,19 +289,15 @@ if (canvas) {
 
   function initParticles() {
     particles.length = 0;
-    for (let i = 0; i < particleCount; i += 1) {
-      particles.push(new Particle());
-    }
+    for (let i = 0; i < particleCount; i += 1) particles.push(new Particle());
   }
 
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     particles.forEach((particle) => {
       particle.update();
       particle.draw();
     });
-
     connectParticles();
     requestAnimationFrame(animate);
   }
