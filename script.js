@@ -287,8 +287,12 @@ if (shopTabs.length && shopPanel) {
       shopTabs.forEach((item) => item.classList.remove('active'));
       tab.classList.add('active');
       if (shopSidebar) {
-        shopSidebar.style.setProperty('--active-index', index.toString());
-      }
+     const tabRect = tab.getBoundingClientRect();
+const sidebarRect = shopSidebar.getBoundingClientRect();
+
+const offset = tabRect.top - sidebarRect.top;
+
+shopSidebar.style.setProperty('--active-offset', `${offset}px`);
       renderShop(tab.dataset.shop, true);
     });
   });
