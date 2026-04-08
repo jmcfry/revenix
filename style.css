@@ -853,18 +853,18 @@ h1 {
   position: relative;
 }
 
-.shop-sidebar::after {
-  content: '';
+.shop-indicator {
   position: absolute;
   left: 6px;
-  top: var(--active-offset, 0px);
+  top: 0;
   width: 3px;
-  height: 70%;
+  height: 0;
+  z-index: 2;
   border-radius: 999px;
   background: linear-gradient(180deg, var(--orange-strong), var(--orange));
   box-shadow: 0 0 16px rgba(255, 159, 26, 0.8);
-  transform: translateY(15%);
-  transition: top 0.35s var(--ease-soft);
+  transition: top 0.35s var(--ease-soft), height 0.35s var(--ease-soft);
+  pointer-events: none;
 }
 
 .shop-tab {
@@ -876,7 +876,7 @@ h1 {
 }
 
 @media (max-width: 1020px) {
-  .shop-sidebar::after {
+  .shop-indicator {
     display: none;
   }
 }
