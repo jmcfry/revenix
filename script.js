@@ -68,18 +68,230 @@ const shopSidebar = document.querySelector('.shop-sidebar');
 
 let shopIndicator = null;
 
-// INDICATORE DINAMICO
-function updateShopIndicator(activeTab) {
-  if (!shopSidebar || !activeTab || !shopIndicator) return;
-
-  const sidebarRect = shopSidebar.getBoundingClientRect();
-  const tabRect = activeTab.getBoundingClientRect();
-
-  shopIndicator.style.top = `${tabRect.top - sidebarRect.top + shopSidebar.scrollTop}px`;
-  shopIndicator.style.height = `${tabRect.height}px`;
-}
-
-const shopData = {/* LASCIA IDENTICO IL shopData */};
+const shopData = {
+  supporter: {
+    title: 'Supporter',
+    subtitle: 'Pacchetti ufficiali Revenix RP per supportare il server e sbloccare vantaggi premium.',
+    cards: [
+      {
+        name: 'Supporter Argento',
+        description: 'Pacchetto ideale per iniziare a supportare la community Revenix RP.',
+        benefits: [
+          'Sistema PED senza limiti',
+          'Ruolo Supporter su Discord',
+          'Accesso market privato',
+          'Giveaway esclusivi',
+          'Assistenza prioritaria',
+          'Canali Discord riservati',
+          'Contatto diretto con staff',
+          'Accesso anticipato spoiler'
+        ],
+        price: '€30'
+      },
+      {
+        name: 'Supporter Oro',
+        description: 'Include tutti i vantaggi Argento con bonus premium aggiuntivi.',
+        benefits: [
+          'Tutti i vantaggi Argento',
+          'Multi-PG (2 personaggi)',
+          'Veicolo Import esclusivo',
+          'Targa personalizzata',
+          'Bonus denaro in-game',
+          'Priorità su case e attività',
+          'Priority Queue',
+          'Area VIP Discord',
+          'Accesso anticipato completo'
+        ],
+        price: '€75'
+      },
+      {
+        name: 'Supporter Diamante',
+        description: 'Il pacchetto top per un’esperienza completa e massima priorità.',
+        benefits: [
+          'Tutti i vantaggi Oro',
+          'Multi-PG (3 personaggi)',
+          'Bonus $2.000.000',
+          'Villa o attività inclusa',
+          '2 veicoli Import full upgrade',
+          'Targhe illimitate',
+          'Accesso immediato server (priority 0)',
+          'Supporto diretto amministrazione',
+          'Accesso contenuti alpha'
+        ],
+        price: '€125'
+      }
+    ]
+  },
+  veicoli: {
+    title: 'Veicoli',
+    subtitle: 'Pacchetti dedicati alla mobilità premium e agli import esclusivi.',
+    cards: [
+      {
+        name: '1',
+        description: 'BMW.',
+        benefits: ['Veicolo import', 'Kit prestazioni al massimo', 'Consegna rapida'],
+        price: '€ XX,XX'
+      },
+      {
+        name: '2',
+        description: 'LAMBORGHINI.',
+        benefits: ['Veicolo import', 'Kit prestazioni al massimo', 'Consegna rapida'],
+        price: '€ XX,XX'
+      }
+    ]
+  },
+  casa: {
+    title: 'Casa',
+    subtitle: 'Soluzioni immobiliari premium per il tuo personaggio.',
+    cards: [
+      {
+        name: 'Starter Property',
+        description: 'Casa base arredata per iniziare subito.',
+        benefits: ['1 proprietà', 'Arredo base', 'Setup veloce'],
+        price: '€ XX,XX'
+      },
+      {
+        name: 'Luxury Estate',
+        description: 'Residenza avanzata con servizi esclusivi.',
+        benefits: ['Villa premium', 'Garage esteso', 'Interiors esclusivi'],
+        price: '€ XX,XX'
+      }
+    ]
+  },
+  fazioni: {
+    title: 'Fazioni',
+    subtitle: 'Pacchetti fazione convertiti in formato shop professionale e ordinato.',
+    cards: [
+      {
+        name: 'Pack Base',
+        description: 'Essenziale per avvio operativo della fazione.',
+        benefits: ['7 Pistole 9mm', '500 colpi', '150.000 soldi puliti'],
+        price: '€18'
+      },
+      {
+        name: 'Pack Elite',
+        description: 'Upgrade intermedio con dotazione estesa.',
+        benefits: ['13 Pistole 9mm', '1500 colpi', '5 giubbotti antiproiettile', '300.000 soldi puliti'],
+        price: '€32'
+      },
+      {
+        name: 'Pack Supreme',
+        description: 'Pacchetto avanzato per operazioni ad alta intensità.',
+        benefits: [
+          '20 Pistole 9mm',
+          '3500 colpi',
+          '10 giubbotti antiproiettile',
+          '5 silenziatori',
+          '500.000 soldi puliti',
+          '150.000 soldi sporchi'
+        ],
+        price: '€50'
+      },
+      {
+        name: 'Pack Deluxe',
+        description: 'Versione completa con bonus veicolo incluso.',
+        benefits: [
+          '20 Pistole 9mm',
+          '4000 colpi',
+          '10 giubbotti antiproiettile',
+          '8 silenziatori',
+          '500.000 soldi puliti',
+          '200.000 soldi sporchi',
+          'Auto a scelta (<40€)'
+        ],
+        price: '€75'
+      }
+    ]
+  },
+  armi: {
+    title: 'Armi',
+    subtitle: 'Pack Pistole 9mm con prezzi ottimizzati e scontistiche progressive.',
+    note: 'Le armi acquistate seguono le regole del server. In caso di perdita o sequestro, non è previsto rimborso.',
+    cards: [
+      {
+        name: 'Pack Pistole 9mm - 5 unità',
+        description: 'Dotazione base per utilizzo iniziale.',
+        benefits: ['5 pistole 9mm', 'Costo totale: €10'],
+        price: '€10'
+      },
+      {
+        name: 'Pack Pistole 9mm - 10 unità',
+        description: 'Formato convenienza con riduzione prezzo.',
+        benefits: ['10 pistole 9mm', 'Sconto 10%'],
+        price: '€18'
+      },
+      {
+        name: 'Pack Pistole 9mm - 15 unità',
+        description: 'Pacchetto avanzato con sconto maggiorato.',
+        benefits: ['15 pistole 9mm', 'Sconto 15%'],
+        price: '€25'
+      },
+      {
+        name: 'Pack Pistole 9mm - 20 unità ★ Best Value',
+        description: 'Miglior rapporto quantità/prezzo.',
+        benefits: ['20 pistole 9mm', 'Best Value'],
+        price: '€33'
+      }
+    ]
+  },
+  soldi: {
+    title: 'Soldi',
+    subtitle: 'Pacchetti visuali denaro in-game con consegna immediata.',
+    cards: [
+      {
+        name: 'Pack Soldi 1',
+        amount: '100.000$',
+        image: 'pack_soldi1.png',
+        description: 'Pacchetto ingresso per iniziare la tua economia RP.',
+        benefits: ['Consegna rapida in-game'],
+        price: '€10'
+      },
+      {
+        name: 'Pack Soldi 2',
+        amount: '350.000$',
+        image: 'pack_soldi2.png',
+        description: 'Pacchetto intermedio per accelerare attività e progressione.',
+        benefits: ['Boost economico bilanciato'],
+        price: '€20'
+      },
+      {
+        name: 'Pack Soldi 3',
+        amount: '750.000$',
+        image: 'pack_soldi3.png',
+        description: 'Pacchetto avanzato per espansione business e RP.',
+        benefits: ['Ideale per investimenti maggiori'],
+        price: '€35'
+      },
+      {
+        name: 'Pack Soldi 4',
+        amount: '1.500.000$',
+        image: 'pack_soldi4.png',
+        description: 'Il pacchetto più completo per massimizzare la progressione.',
+        benefits: ['Massimo valore disponibile'],
+        price: '€50',
+        badge: 'Best Value'
+      }
+    ]
+  },
+  'multi-pg': {
+    title: 'Multi-PG',
+    subtitle: 'Aggiungi nuovi personaggi e amplia la tua esperienza narrativa o scegli il tuo personaggio ideale.',
+    cards: [
+      {
+        name: 'Slot +1',
+        description: 'Pack PED.',
+        benefits: ['Scelta di un personaggio ideale'],
+        price: '€50,00'
+      },
+      {
+        name: 'Slot +1',
+        description: 'Nuovo slot PG.',
+        benefits: ['1 slot aggiuntivo nuovo PG'],
+        price: '€20,00'
+      }
+    ]
+  }
+};
 
 function panelMarkup(data) {
   const head = `
@@ -89,18 +301,22 @@ function panelMarkup(data) {
     </div>
   `;
 
-  const cards = data.cards.map(card => `
-    <article class="shop-item">
-      ${card.badge ? `<span class="shop-badge">${card.badge}</span>` : ''}
-      <h3>${card.name}</h3>
-      ${card.image ? `<div class="shop-image-wrap"><img class="shop-image" src="${card.image}" alt="${card.name}" loading="lazy" /></div>` : ''}
-      ${card.amount ? `<p class="shop-amount">${card.amount}</p>` : ''}
-      <p>${card.description}</p>
-      <ul>${card.benefits.map(item => `<li>◆ ${item}</li>`).join('')}</ul>
-      <p class="shop-price">Prezzo: ${card.price}</p>
-      <a class="btn btn-small shop-buy" href="https://paypal.me/danielenooo" target="_blank">Acquista</a>
-    </article>
-  `).join('');
+  const cards = data.cards
+    .map(
+      (card) => `
+      <article class="shop-item">
+        ${card.badge ? `<span class="shop-badge">${card.badge}</span>` : ''}
+        <h3>${card.name}</h3>
+        ${card.image ? `<div class="shop-image-wrap"><img class="shop-image" src="${card.image}" alt="${card.name}" loading="lazy" /></div>` : ''}
+        ${card.amount ? `<p class="shop-amount">${card.amount}</p>` : ''}
+        <p>${card.description}</p>
+        <ul>${card.benefits.map((item) => `<li>◆ ${item}</li>`).join('')}</ul>
+        <p class="shop-price">Prezzo: ${card.price}</p>
+        <a class="btn btn-small shop-buy" href="https://paypal.me/danielenooo" target="_blank" rel="noopener noreferrer">Acquista</a>
+      </article>
+    `
+    )
+    .join('');
 
   const note = data.note ? `<p class="shop-placeholder">${data.note}</p>` : '';
   return `${head}<div class="shop-cards">${cards}</div>${note}`;
@@ -129,12 +345,21 @@ function renderShop(section, animate = true) {
   }, 240);
 }
 
-// INIT SHOP
-if (shopTabs.length && shopPanel) {
+function updateShopIndicator(activeTab) {
+  if (!shopSidebar || !shopIndicator || !activeTab) return;
 
+  const sidebarRect = shopSidebar.getBoundingClientRect();
+  const tabRect = activeTab.getBoundingClientRect();
+
+  shopIndicator.style.top = `${tabRect.top - sidebarRect.top + shopSidebar.scrollTop}px`;
+  shopIndicator.style.height = `${tabRect.height}px`;
+}
+
+if (shopTabs.length && shopPanel) {
   if (shopSidebar) {
     shopIndicator = document.createElement('div');
     shopIndicator.className = 'shop-indicator';
+    shopIndicator.setAttribute('aria-hidden', 'true');
     shopSidebar.appendChild(shopIndicator);
   }
 
@@ -143,28 +368,30 @@ if (shopTabs.length && shopPanel) {
 
   renderShop(initialSection, false);
 
-  if (initialActiveTab) {
-    requestAnimationFrame(() => updateShopIndicator(initialActiveTab));
-  }
+  requestAnimationFrame(() => {
+    if (initialActiveTab) {
+      updateShopIndicator(initialActiveTab);
+    }
+  });
 
   shopTabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       shopTabs.forEach((item) => item.classList.remove('active'));
       tab.classList.add('active');
 
-      requestAnimationFrame(() => updateShopIndicator(tab));
-
+      updateShopIndicator(tab);
       renderShop(tab.dataset.shop, true);
     });
   });
 
   window.addEventListener('resize', () => {
     const currentActiveTab = document.querySelector('.shop-tab.active');
-    if (currentActiveTab) updateShopIndicator(currentActiveTab);
+    if (currentActiveTab) {
+      updateShopIndicator(currentActiveTab);
+    }
   });
 }
 
-// Ripple effect
 document.querySelectorAll('.btn, .shop-tab, .card').forEach((element) => {
   element.addEventListener('click', (event) => {
     const ripple = document.createElement('span');
@@ -177,7 +404,6 @@ document.querySelectorAll('.btn, .shop-tab, .card').forEach((element) => {
   });
 });
 
-// Canvas particles (identico)
 const canvas = document.getElementById('bg-canvas');
 
 if (canvas) {
@@ -221,9 +447,13 @@ if (canvas) {
   }
 
   function connectParticles() {
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const distance = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+    for (let i = 0; i < particles.length; i += 1) {
+      for (let j = i + 1; j < particles.length; j += 1) {
+        const distance = Math.hypot(
+          particles[i].x - particles[j].x,
+          particles[i].y - particles[j].y
+        );
+
         if (distance < 125) {
           const opacity = 1 - distance / 125;
           ctx.beginPath();
@@ -239,14 +469,16 @@ if (canvas) {
 
   function initParticles() {
     particles.length = 0;
-    for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+    for (let i = 0; i < particleCount; i += 1) {
+      particles.push(new Particle());
+    }
   }
 
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((p) => {
-      p.update();
-      p.draw();
+    particles.forEach((particle) => {
+      particle.update();
+      particle.draw();
     });
     connectParticles();
     requestAnimationFrame(animate);
