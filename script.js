@@ -293,9 +293,14 @@ if (shopTabs.length && shopPanel) {
     });
   });
 
-  if (shopSidebar) {
-    shopSidebar.style.setProperty('--active-index', '0');
-  }
+if (shopSidebar) {
+  const tabRect = tab.getBoundingClientRect();
+  const sidebarRect = shopSidebar.getBoundingClientRect();
+
+  const offset = tabRect.top - sidebarRect.top;
+
+  shopSidebar.style.setProperty('--active-offset', `${offset}px`);
+}
 }
 
 document.querySelectorAll('.btn, .shop-tab, .card').forEach((element) => {
