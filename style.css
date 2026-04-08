@@ -142,10 +142,7 @@ body {
   overflow: hidden;
   transition:
     transform 0.25s var(--ease-out-cubic),
-    box-shadow 0.25s var(--ease-out-cubic),
-    color 0.25s var(--ease-premium),
-    border-color 0.25s var(--ease-premium),
-    background-color 0.25s var(--ease-premium);
+    box-shadow 0.25s var(--ease-out-cubic);
 }
 
 .btn-small,
@@ -191,7 +188,7 @@ body {
 }
 
 .btn::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(120deg, transparent 0%, rgba(255, 210, 140, 0.3) 50%, transparent 100%);
@@ -297,19 +294,14 @@ h2 {
   border-radius: 16px;
   padding: 1.5rem;
   background: linear-gradient(170deg, rgba(24, 18, 12, 0.62), rgba(12, 12, 12, 0.95));
-  transform: translateY(0) scale(1);
-  will-change: transform, box-shadow;
   transition:
     transform 0.3s var(--ease-out-cubic),
     box-shadow 0.3s var(--ease-out-cubic),
-    border-color 0.3s var(--ease-out-cubic),
-    color 0.25s var(--ease-premium),
-    border-color 0.25s var(--ease-premium),
-    background-color 0.25s var(--ease-premium);
+    border-color 0.3s var(--ease-out-cubic);
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
@@ -490,13 +482,6 @@ h2 {
 }
 
 /* Shop */
-.shop-layout {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 1rem;
-  align-items: start;
-}
-
 .shop-hero .subtitle {
   max-width: 720px;
   margin-inline: auto;
@@ -564,7 +549,7 @@ h2 {
 }
 
 .shop-tab::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(100deg, transparent 0%, rgba(255, 159, 26, 0.14) 50%, transparent 100%);
@@ -573,7 +558,7 @@ h2 {
 }
 
 .shop-tab::after {
-  content: '';
+  content: "";
   float: right;
   width: 8px;
   height: 8px;
@@ -774,7 +759,7 @@ h2 {
 }
 
 .shop-image-wrap::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -801,7 +786,6 @@ h2 {
   box-shadow: 0 0 16px rgba(255, 159, 26, 0.5);
 }
 
-/* Motion */
 .btn-ripple {
   position: absolute;
   border-radius: 50%;
@@ -838,7 +822,6 @@ h2 {
   }
 }
 
-/* Responsive */
 @media (max-width: 1020px) {
   .factions-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -874,17 +857,6 @@ h2 {
 @media (max-width: 960px) {
   .rules-layout {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 860px) {
-  .shop-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .shop-sidebar {
-    position: static;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
