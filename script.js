@@ -127,15 +127,15 @@ const shopData = {
     subtitle: 'Pacchetti dedicati alla mobilità premium e agli import esclusivi.',
     cards: [
       {
-        name: '1',
-        description: 'BMW.',
-        benefits: ['Veicolo import', 'Kit prestazioni al massimo', 'Consegna rapida'],
+        name: 'Street Import',
+        description: 'Veicolo import perfetto per utilizzo quotidiano.',
+        benefits: ['Import esclusivo', 'Assetto personalizzato', 'Consegna rapida'],
         price: '€ XX,XX'
       },
       {
-        name: '2',
-        description: 'LAMBORGHINI.',
-        benefits: ['Veicolo import', 'Kit prestazioni al massimo', 'Consegna rapida'],
+        name: 'Track Elite',
+        description: 'Configurazione sportiva per performance elevate.',
+        benefits: ['Top speed boost', 'Wrap premium', 'Dettagli racing'],
         price: '€ XX,XX'
       }
     ]
@@ -177,28 +177,13 @@ const shopData = {
       {
         name: 'Pack Supreme',
         description: 'Pacchetto avanzato per operazioni ad alta intensità.',
-        benefits: [
-          '20 Pistole 9mm',
-          '3500 colpi',
-          '10 giubbotti antiproiettile',
-          '5 silenziatori',
-          '500.000 soldi puliti',
-          '150.000 soldi sporchi'
-        ],
+        benefits: ['20 Pistole 9mm', '3500 colpi', '10 giubbotti antiproiettile', '5 silenziatori', '500.000 soldi puliti', '150.000 soldi sporchi'],
         price: '€50'
       },
       {
         name: 'Pack Deluxe',
         description: 'Versione completa con bonus veicolo incluso.',
-        benefits: [
-          '20 Pistole 9mm',
-          '4000 colpi',
-          '10 giubbotti antiproiettile',
-          '8 silenziatori',
-          '500.000 soldi puliti',
-          '200.000 soldi sporchi',
-          'Auto a scelta (<40€)'
-        ],
+        benefits: ['20 Pistole 9mm', '4000 colpi', '10 giubbotti antiproiettile', '8 silenziatori', '500.000 soldi puliti', '200.000 soldi sporchi', 'Auto a scelta (<40€)'],
         price: '€75'
       }
     ]
@@ -208,30 +193,10 @@ const shopData = {
     subtitle: 'Pack Pistole 9mm con prezzi ottimizzati e scontistiche progressive.',
     note: 'Le armi acquistate seguono le regole del server. In caso di perdita o sequestro, non è previsto rimborso.',
     cards: [
-      {
-        name: 'Pack Pistole 9mm - 5 unità',
-        description: 'Dotazione base per utilizzo iniziale.',
-        benefits: ['5 pistole 9mm', 'Costo totale: €10'],
-        price: '€10'
-      },
-      {
-        name: 'Pack Pistole 9mm - 10 unità',
-        description: 'Formato convenienza con riduzione prezzo.',
-        benefits: ['10 pistole 9mm', 'Sconto 10%'],
-        price: '€18'
-      },
-      {
-        name: 'Pack Pistole 9mm - 15 unità',
-        description: 'Pacchetto avanzato con sconto maggiorato.',
-        benefits: ['15 pistole 9mm', 'Sconto 15%'],
-        price: '€25'
-      },
-      {
-        name: 'Pack Pistole 9mm - 20 unità ★ Best Value',
-        description: 'Miglior rapporto quantità/prezzo.',
-        benefits: ['20 pistole 9mm', 'Best Value'],
-        price: '€33'
-      }
+      { name: 'Pack Pistole 9mm - 5 unità', description: 'Dotazione base per utilizzo iniziale.', benefits: ['5 pistole 9mm', 'Costo totale: €10'], price: '€10' },
+      { name: 'Pack Pistole 9mm - 10 unità', description: 'Formato convenienza con riduzione prezzo.', benefits: ['10 pistole 9mm', 'Sconto 10%'], price: '€18' },
+      { name: 'Pack Pistole 9mm - 15 unità', description: 'Pacchetto avanzato con sconto maggiorato.', benefits: ['15 pistole 9mm', 'Sconto 15%'], price: '€25' },
+      { name: 'Pack Pistole 9mm - 20 unità ★ Best Value', description: 'Miglior rapporto quantità/prezzo.', benefits: ['20 pistole 9mm', 'Best Value'], price: '€33' }
     ]
   },
   soldi: {
@@ -324,7 +289,6 @@ function panelMarkup(data) {
 
 function renderShop(section, animate = true) {
   if (!shopPanel || !shopData[section]) return;
-
   const html = panelMarkup(shopData[section]);
 
   if (!animate) {
@@ -369,16 +333,13 @@ if (shopTabs.length && shopPanel) {
   renderShop(initialSection, false);
 
   requestAnimationFrame(() => {
-    if (initialActiveTab) {
-      updateShopIndicator(initialActiveTab);
-    }
+    if (initialActiveTab) updateShopIndicator(initialActiveTab);
   });
 
   shopTabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       shopTabs.forEach((item) => item.classList.remove('active'));
       tab.classList.add('active');
-
       updateShopIndicator(tab);
       renderShop(tab.dataset.shop, true);
     });
@@ -386,9 +347,7 @@ if (shopTabs.length && shopPanel) {
 
   window.addEventListener('resize', () => {
     const currentActiveTab = document.querySelector('.shop-tab.active');
-    if (currentActiveTab) {
-      updateShopIndicator(currentActiveTab);
-    }
+    if (currentActiveTab) updateShopIndicator(currentActiveTab);
   });
 }
 
@@ -449,11 +408,7 @@ if (canvas) {
   function connectParticles() {
     for (let i = 0; i < particles.length; i += 1) {
       for (let j = i + 1; j < particles.length; j += 1) {
-        const distance = Math.hypot(
-          particles[i].x - particles[j].x,
-          particles[i].y - particles[j].y
-        );
-
+        const distance = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
         if (distance < 125) {
           const opacity = 1 - distance / 125;
           ctx.beginPath();
@@ -469,9 +424,7 @@ if (canvas) {
 
   function initParticles() {
     particles.length = 0;
-    for (let i = 0; i < particleCount; i += 1) {
-      particles.push(new Particle());
-    }
+    for (let i = 0; i < particleCount; i += 1) particles.push(new Particle());
   }
 
   function animate() {
