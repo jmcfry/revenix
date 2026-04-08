@@ -856,13 +856,14 @@ h1 {
 .shop-sidebar::after {
   content: '';
   position: absolute;
-  left: 8px;
+  left: 6px;
   top: var(--active-offset, 0px);
   width: 3px;
-  height: 32px;
+  height: 70%;
   border-radius: 999px;
   background: linear-gradient(180deg, var(--orange-strong), var(--orange));
   box-shadow: 0 0 16px rgba(255, 159, 26, 0.8);
+  transform: translateY(15%);
   transition: top 0.35s var(--ease-soft);
 }
 
