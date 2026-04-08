@@ -857,13 +857,13 @@ h1 {
   content: '';
   position: absolute;
   left: 8px;
-  top: calc(56px + (var(--active-index, 0) * 45px));
+  top: var(--active-offset, 0px);
   width: 3px;
   height: 32px;
   border-radius: 999px;
   background: linear-gradient(180deg, var(--orange-strong), var(--orange));
   box-shadow: 0 0 16px rgba(255, 159, 26, 0.8);
-  transition: top 0.45s var(--ease-soft);
+  transition: top 0.35s var(--ease-soft);
 }
 
 .shop-tab {
