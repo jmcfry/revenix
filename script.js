@@ -65,6 +65,8 @@ reveals.forEach((section) => revealObserver.observe(section));
 const shopTabs = document.querySelectorAll('.shop-tab');
 const shopPanel = document.getElementById('shop-panel');
 const shopSidebar = document.querySelector('.shop-sidebar');
+let shopIndicator = null;
+let shopResizeObserver = null;
 
 const shopData = {
   supporter: {
@@ -279,32 +281,53 @@ function renderShop(section, animate = true) {
   }, 240);
 }
 
-if (shopTabs.length && shopPanel) {
-  renderShop('supporter', false);
+function updateShopIndicator(activeTab) {
+  if (!shopSidebar || !activeTab || !shopIndicator) return;
 
-  shopTabs.forEach((tab, index) => {
+  const sidebarRect = shopSidebar.getBoundingClientRect();
+  const tabRect = activeTab.getBoundingClientRect();
+
+  shopIndicator.style.top = `${tabRect.top - sidebarRect.top + shopSidebar.scrollTop}px`;
+  shopIndicator.style.height = `${tabRect.height}px`;
+}
+
+if (shopTabs.length && shopPanel) {
+  if (shopSidebar) {
+    shopIndicator = document.createElement('div');
+    shopIndicator.className = 'shop-indicator';
+    shopIndicator.setAttribute('aria-hidden', 'true');
+    shopSidebar.appendChild(shopIndicator);
+  }
+  const initialActiveTab = document.querySelector('.shop-tab.active') || shopTabs[0];
+  const initialSection = initialActiveTab?.dataset.shop || 'supporter';
+  renderShop(initialSection, false);
+
+  shopTabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       shopTabs.forEach((item) => item.classList.remove('active'));
       tab.classList.add('active');
-      if (shopSidebar) {
-     const tabRect = tab.getBoundingClientRect();
-const sidebarRect = shopSidebar.getBoundingClientRect();
-
-const offset = tabRect.top - sidebarRect.top;
-
-shopSidebar.style.setProperty('--active-offset', `${offset}px`);
+      requestAnimationFrame(() => updateShopIndicator(tab));
       renderShop(tab.dataset.shop, true);
     });
   });
 
-if (shopSidebar) {
-  const tabRect = tab.getBoundingClientRect();
-  const sidebarRect = shopSidebar.getBoundingClientRect();
+  if (initialActiveTab) {
+    requestAnimationFrame(() => updateShopIndicator(initialActiveTab));
+  }
 
-  const offset = tabRect.top - sidebarRect.top;
+  window.addEventListener('resize', () => {
+    const currentActiveTab = document.querySelector('.shop-tab.active');
+    if (currentActiveTab) updateShopIndicator(currentActiveTab);
+  });
 
-  shopSidebar.style.setProperty('--active-offset', `${offset}px`);
-}
+  if (window.ResizeObserver) {
+    shopResizeObserver = new ResizeObserver(() => {
+      const currentActiveTab = document.querySelector('.shop-tab.active');
+      if (currentActiveTab) updateShopIndicator(currentActiveTab);
+    });
+    shopResizeObserver.observe(shopSidebar);
+    shopTabs.forEach((tab) => shopResizeObserver.observe(tab));
+  }
 }
 
 document.querySelectorAll('.btn, .shop-tab, .card').forEach((element) => {
